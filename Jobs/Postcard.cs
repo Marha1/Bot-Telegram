@@ -24,7 +24,7 @@ namespace WebApplication12.Jobs
                             {
                         
                                     item.Age += 1;
-                                    TelegramBotHelper telegram = new TelegramBotHelper(token:"6860178002:AAEnaBeLfhvsehNKVv9xDbrPcVZyfkwmsI0");
+                                    TelegramBotHelper telegram = new TelegramBotHelper(token: "6698031818:AAG9R2Vb9g-G52p77mgJRMqsL3-P7jFdInA");
                                     telegram.GetName(item.Name, item.Age);
                                     telegram.GetUpdates();
                                 db.SaveChanges();

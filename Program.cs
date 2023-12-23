@@ -1,4 +1,5 @@
 
+using QuartzApp.Jobs;
 using WebApplication12;
 
 namespace Bot
@@ -25,7 +26,8 @@ namespace Bot
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            PostcardSheduler.Start();
+            Console.WriteLine("Задача запущена");
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

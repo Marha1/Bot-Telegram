@@ -18,13 +18,6 @@ namespace WebApplication12.Controllers
             Console.WriteLine("Задача запущена");
             return Ok();
         }
-        [Route("api/message")]
-        [HttpGet]
-        public IActionResult Get()
-        {
-            PostcardSheduler.Start();
-
-            return Ok();
-        }
+       
     }
 }

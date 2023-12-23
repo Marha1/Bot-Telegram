@@ -10,7 +10,7 @@ namespace WebApplication12
 
         string Name;
         int Age;
-     
+
         Telegram.Bot.TelegramBotClient _client;
         public TelegramBotHelper(string token)
         {
@@ -21,61 +21,61 @@ namespace WebApplication12
 
         }
 
-        internal async  void GetUpdates()
+        internal async void GetUpdates()
         {
-            await Task.Run(() =>
-            {
+            
+            
                 _client = new Telegram.Bot.TelegramBotClient(_token);
-                    while (true)
+                while (true)
+                {
+                    try
                     {
-                        try
-                        {
                         int offset = 0;
-                             var updates = _client.GetUpdatesAsync().Result; ;//получение инфы что написали
-                                foreach (var update in updates)
-                                {
-                                   
-                                    Thread.Sleep(1000);
-                                    processUpdate(update);
-                                    Thread.Sleep(1000);
-                                    offset = update.Id + 1;
-                                    break;
-                                    
-                                }
-                        break;
-                            
-                        }
-                        catch (Exception)
+                        var updates = _client.GetUpdatesAsync().Result; ;//получение инфы что написали
+                        foreach (var update in updates)
                         {
 
-                            throw;
+                            
+                            processUpdate(update);
+                            Thread.Sleep(1000);
+                            offset = update.Id + 1;
+                            break;
+
                         }
+                        break;
+
                     }
-                
-            });
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+
+            
         }
         public void GetName(string name, int Age)
         {
             this.Name = name;
             this.Age = Age;
-          
+
         }
 
         internal void processUpdate(Telegram.Bot.Types.Update update)
         {
-                    string imagePath = Path.Combine(Environment.CurrentDirectory, "1.png");
-                    using (var stream = File.OpenRead(imagePath)) 
-                    _client.SendPhotoAsync(update.Message.Chat.Id, new Telegram.Bot.Types.InputFileStream(stream));
-           
-                    var text = $"С  днем рождения {Name},Успехов радости веселия Вам исполнилось {Age}";
-                    _client.SendTextMessageAsync(update.Message.Chat.Id, text);
-                    imagePath = null;
+            string imagePath = Path.Combine(Environment.CurrentDirectory,"1.png");
+            using (var stream = File.OpenRead(imagePath))
+                _client.SendPhotoAsync(update.Message.Chat.Id, new Telegram.Bot.Types.InputFileStream(stream));
+
+            var text = $"С  днем рождения {Name},Успехов радости веселия Вам исполнилось {Age}";
+            _client.SendTextMessageAsync(update.Message.Chat.Id, text);
+            imagePath = null;
 
         }
-        
 
-      
 
-        
+
+
+
     }
 }
