@@ -30,15 +30,10 @@ namespace WebApplication12
                 {
                     try
                     {
-                        int offset = 0;
                         var updates = _client.GetUpdatesAsync().Result; ;//получение инфы что написали
                         foreach (var update in updates)
                         {
-
-                            
                             processUpdate(update);
-                            Thread.Sleep(1000);
-                            offset = update.Id + 1;
                             break;
 
                         }
@@ -66,7 +61,6 @@ namespace WebApplication12
             string imagePath = Path.Combine(Environment.CurrentDirectory,"1.png");
             using (var stream = File.OpenRead(imagePath))
                 _client.SendPhotoAsync(update.Message.Chat.Id, new Telegram.Bot.Types.InputFileStream(stream));
-
             var text = $"С  днем рождения {Name},Успехов радости веселия Вам исполнилось {Age}";
             _client.SendTextMessageAsync(update.Message.Chat.Id, text);
             imagePath = null;

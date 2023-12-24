@@ -22,7 +22,6 @@ namespace WebApplication12.Jobs
                            
                             if (item.DateOfBirh.Month == d2.Month&&item.DateOfBirh.Day==d2.Day&&item.DateOfBirh.Hour==d2.Hour&& item.DateOfBirh.Minute == d2.Minute)
                             {
-                        
                                     item.Age += 1;
                                     TelegramBotHelper telegram = new TelegramBotHelper(token: "6698031818:AAG9R2Vb9g-G52p77mgJRMqsL3-P7jFdInA");
                                     telegram.GetName(item.Name, item.Age);

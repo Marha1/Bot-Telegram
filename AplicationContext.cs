@@ -8,6 +8,7 @@ namespace WebApplication12.Models
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseNpgsql(@"host=localhost;port=5432;database=Office;username=postgres;password=053352287");
+            
         }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
