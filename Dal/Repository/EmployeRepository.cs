@@ -11,6 +11,8 @@ namespace WebApplication12.Dal.Repository
         
         public void Add(Employee entity)
         {
+            entity.Name = entity.Name==null?"Unknown":entity.Name;
+            entity.Post = entity.Post == null ? "None" : entity.Post;
             entity.Age = GetAge(entity.DateOfBirh);
             _context.AddAsync(entity);
             _context.SaveChanges();
@@ -39,6 +41,10 @@ namespace WebApplication12.Dal.Repository
         public Employee GetById(int id)
         {
             throw new NotImplementedException();
+        }
+        public void Save()
+        {
+            _context.SaveChanges();
         }
 
         public void Update(Employee entity)

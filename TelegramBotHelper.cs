@@ -11,33 +11,36 @@ namespace WebApplication12
         string Name;
         int Age;
 
+        private static List<long> Id = new List<long>();
         Telegram.Bot.TelegramBotClient _client;
         public TelegramBotHelper(string token)
         {
             this._token = token;
         }
-        public TelegramBotHelper()
+        internal  void GetUpdates()
         {
-
-        }
-
-        internal async void GetUpdates()
-        {
-            
-            
                 _client = new Telegram.Bot.TelegramBotClient(_token);
-                while (true)
-                {
+                var updates = _client.GetUpdatesAsync().Result;
+            foreach ( var item in updates)
+            {
+                Id.Add(item.Message.Chat.Id);
+
+            }
+            var results = Id.GroupBy(x => ((ulong)x)).Select(x => x.First()).ToList();
+            if (updates != null)
+             {
+             
                     try
                     {
-                        var updates = _client.GetUpdatesAsync().Result; ;//получение инфы что написали
-                        foreach (var update in updates)
+                        foreach (var update in results)
                         {
+                            Thread.Sleep(1000);
                             processUpdate(update);
-                            break;
+                            
+                            
+
 
                         }
-                        break;
 
                     }
                     catch (Exception)
@@ -45,7 +48,10 @@ namespace WebApplication12
 
                         throw;
                     }
-                }
+
+                
+            }
+                
 
             
         }
@@ -56,14 +62,14 @@ namespace WebApplication12
 
         }
 
-        internal void processUpdate(Telegram.Bot.Types.Update update)
+        internal void processUpdate(long id)
         {
             string imagePath = Path.Combine(Environment.CurrentDirectory,"1.png");
             using (var stream = File.OpenRead(imagePath))
-                _client.SendPhotoAsync(update.Message.Chat.Id, new Telegram.Bot.Types.InputFileStream(stream));
+                _client.SendPhotoAsync(id, new Telegram.Bot.Types.InputFileStream(stream));
             var text = $"С  днем рождения {Name},Успехов радости веселия Вам исполнилось {Age}";
-            _client.SendTextMessageAsync(update.Message.Chat.Id, text);
-            imagePath = null;
+            _client.SendTextMessageAsync(id, text);
+            
 
         }
 

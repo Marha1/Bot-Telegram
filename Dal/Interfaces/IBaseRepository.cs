@@ -7,6 +7,7 @@ namespace WebApplication12.Dal.Interfaces
         void Add (T entity);
         void Update (T entity);
         void Delete (int id);
+        void Save();
         IEnumerable<T> GetAll();
 
 
