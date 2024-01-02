@@ -1,16 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using WebApplication12;
 namespace WebApplication12.Models
 {
     public class AplicationContext:DbContext
     {
         public DbSet<Employee>Employees { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+
+        private readonly IConfiguration _configuration;
+
+        public AplicationContext(DbContextOptions<AplicationContext> options, IConfiguration configuration)
+            : base(options)
         {
-            builder.UseNpgsql(@"host=localhost;port=5432;database=Office;username=postgres;password=053352287");
-            
+            _configuration = configuration;
         }
-        
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().HasKey(t => t.Id);

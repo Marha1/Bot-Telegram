@@ -7,8 +7,12 @@ namespace WebApplication12.Dal.Repository
 {
     public class EmployeRepository : IBaseRepository<Employee>
     {
-        private readonly AplicationContext _context= new AplicationContext();
-        
+        private readonly AplicationContext _context;
+        public EmployeRepository(AplicationContext context)
+        {
+                _context=context;
+        }
+
         public void Add(Employee entity)
         {
             entity.Name = entity.Name==null?"Unknown":entity.Name;

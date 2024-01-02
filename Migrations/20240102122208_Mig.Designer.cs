@@ -12,8 +12,8 @@ using WebApplication12.Models;
 namespace WebApplication12.Migrations
 {
     [DbContext(typeof(AplicationContext))]
-    [Migration("20231218212337_Office")]
-    partial class Office
+    [Migration("20240102122208_Mig")]
+    partial class Mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,9 +40,11 @@ namespace WebApplication12.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Post")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

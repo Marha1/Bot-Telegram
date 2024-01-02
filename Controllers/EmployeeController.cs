@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using WebApplication12.Dal;
+using WebApplication12.Dal.Interfaces;
 using WebApplication12.Dal.Repository;
 using WebApplication12.Models;
 
@@ -8,8 +9,13 @@ namespace WebApplication12.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly EmployeRepository employeerepository=new EmployeRepository();
-        
+        private readonly IBaseRepository<Employee> employeerepository;
+
+        public EmployeeController(IBaseRepository<Employee> employeerepository)
+        {
+            this.employeerepository = employeerepository;
+        }
+
 
         [Route("api/[controller]")]
         [HttpPost]
