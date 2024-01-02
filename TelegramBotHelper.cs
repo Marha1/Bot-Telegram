@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using Microsoft.AspNetCore.Mvc;
+using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 using WebApplication12.Models;
 
@@ -29,25 +30,28 @@ namespace WebApplication12
             var results = Id.GroupBy(x => ((ulong)x)).Select(x => x.First()).ToList();
             if (updates != null)
              {
-             
-                    try
-                    {
+                    
+                    
                         foreach (var update in results)
                         {
-                            Thread.Sleep(1000);
-                            processUpdate(update);
-                            
-                            
+                            Thread.Sleep(2000);
+                            try
+                            {
+                                
+                                var imagePath = Path.Combine(Environment.CurrentDirectory,"1.png");
+                                using (var stream = File.OpenRead(imagePath))
+                                    _client.SendPhotoAsync(update, new Telegram.Bot.Types.InputFileStream(stream));
+                                var text = $"С  днем рождения {Name},Успехов радости веселия Вам исполнилось {Age}";
+                                _client.SendTextMessageAsync(update, text);
+                            }
+                            catch 
+                            {
 
+                                    Console.WriteLine("Ошибка отправки сообщений");
+                            }
+                           
 
                         }
-
-                    }
-                    catch (Exception)
-                    {
-
-                        throw;
-                    }
 
                 
             }
@@ -61,21 +65,6 @@ namespace WebApplication12
             this.Age = Age;
 
         }
-
-        internal void processUpdate(long id)
-        {
-            string imagePath = Path.Combine(Environment.CurrentDirectory,"1.png");
-            using (var stream = File.OpenRead(imagePath))
-                _client.SendPhotoAsync(id, new Telegram.Bot.Types.InputFileStream(stream));
-            var text = $"С  днем рождения {Name},Успехов радости веселия Вам исполнилось {Age}";
-            _client.SendTextMessageAsync(id, text);
-            
-
-        }
-
-
-
-
 
     }
 }

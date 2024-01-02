@@ -130,4 +130,3 @@ C:\Users\Hi-Tech\OneDrive\Desktop\Bot-Telegram\obj\Debug\net6.0\refint\WebApplic
 C:\Users\Hi-Tech\OneDrive\Desktop\Bot-Telegram\obj\Debug\net6.0\WebApplication12.pdb
 C:\Users\Hi-Tech\OneDrive\Desktop\Bot-Telegram\obj\Debug\net6.0\WebApplication12.genruntimeconfig.cache
 C:\Users\Hi-Tech\OneDrive\Desktop\Bot-Telegram\obj\Debug\net6.0\ref\WebApplication12.dll
-C:\Users\Hi-Tech\OneDrive\Desktop\Bot-Telegram\bin\Debug\net6.0\1.png
